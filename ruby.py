@@ -27,7 +27,8 @@ def gauss(x, sigma):
 
 
 def voigt(x, sigma, gamma):
-    return np.real(wofz((x + 1j*gamma)/(sigma * np.sqrt(2)))) /(sigma * np.sqrt(2*np.pi))
+    return (np.real(wofz((x + 1j*gamma)/(sigma * np.sqrt(2)))) /
+            (sigma * np.sqrt(2*np.pi)))
 
 
 def ruby(x, x1, s1, g1, a1, x2, s2, g2, a2, b):

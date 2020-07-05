@@ -42,13 +42,13 @@ def ruby(x, x1, w1, n1, a1, x2, w2, n2, a2, b0, b1, b2):
 def pressure(wl):
     A = 1904.0
     B = 7.665
-    wl0 = 693.548
+    wl0 = 693.516
     return A/B * (((wl-wl0)/wl0 + 1)**B - 1)
 
 
 # Genral figure preperation
 plt.close('all')
-plt.rc('font', **{'family': 'serif', 'serif': ['DejaVu serif']})
+plt.rc('font',**{'family':'sans-serif','sans-serif':['DejaVu Sans']})
 plt.rc('text', usetex=False)
 plt.rc('xtick', labelsize=14)
 plt.rc('ytick', labelsize=14)

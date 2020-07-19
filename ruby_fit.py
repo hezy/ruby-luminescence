@@ -48,7 +48,7 @@ def pressure(wl):
 
 # Genral figure preperation
 plt.close('all')
-plt.rc('font',**{'family':'sans-serif','sans-serif':['DejaVu Sans']})
+#plt.rc('font',**{'family':'sans-serif','sans-serif':['DejaVu Sans']})
 plt.rc('text', usetex=False)
 plt.rc('xtick', labelsize=14)
 plt.rc('ytick', labelsize=14)

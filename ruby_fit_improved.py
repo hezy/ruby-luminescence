@@ -42,7 +42,7 @@ def ruby(x, x1, w1, n1, a1, x2, w2, n2, a2, b0, b1, b2):
 def pressure(wl):
     A = 1904.0
     B = 7.665
-    wl0 = 693.318
+    wl0 = 693.29427
     return A/B * (((wl-wl0)/wl0 + 1)**B - 1)
 
 
@@ -91,14 +91,16 @@ for file in sorted(files):
     press = '%s' % float('%.4g' % pressure(popt[4]))
     subtitle = '$ \\lambda $ = ' + lamb + ' nm  ,  P = ' + press + ' GPa'
 
-    plt.figure(figsize=(11.7, 8.3), dpi=77)
+    plt.figure(figsize=(11.7, 8.3), dpi=144)
 
     plt.suptitle(title, y=0.97, fontsize=20)
     plt.title(subtitle, y=1.01, fontsize=18)
 
-    plt.plot(x, y - background(x, *popt[8:11]), '.',
+    plt.plot(x, y - background(x, *popt[8:11]),
+             'o', markersize=5, alpha=0.7, fillstyle='none',
              label='experiment')
-    plt.plot(x, yfit - background(x, *popt[8:11]), '-',
+    plt.plot(x, yfit - background(x, *popt[8:11]),
+             linestyle='-', alpha=0.7, linewidth=2,
              label='fit')
 #    plt.plot(x, background(x, *popt[8:11]),
 #             label='background')
@@ -106,7 +108,9 @@ for file in sorted(files):
 #             label='peak 1')
 #    plt.plot(x, background(x, *popt[8:11]) + pseudo_voigt(x, *popt[4:8]),
 #             label='peak 2')
-    plt.plot(x, ydif, '-', label='residual')
+    plt.plot(x, ydif,
+             linestyle='-', alpha=0.7, linewidth=2,
+             label='residual')
 
     # plt.grid(True,
     #          which='major',

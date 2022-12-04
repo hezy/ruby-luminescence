@@ -14,8 +14,8 @@ from scipy.special import wofz
 from scipy.optimize import curve_fit
 import matplotlib.pyplot as plt
 #import matplotlib as mpl
-from matplotlib.colors import BoundaryNorm
-from matplotlib.ticker import MaxNLocator
+#from matplotlib.colors import BoundaryNorm
+#from matplotlib.ticker import MaxNLocator
 
 def lorentz(x, wL):
     # Lorentz with max=1 and w=FWHM: 
@@ -44,7 +44,7 @@ def pseudo_voigt(x, w, n):
     return n * gauss(x, w) + (1-n) * lorentz(x,w)
 
 x = np.arange (-10, 11 , 1e-2)
-#xfit = np.arange (-12.0, 12.0 , 0.01)
+xfit = np.arange (-12.0, 12.0 , 0.01)
 
 w = 1.0
 yL = lorentz(x, w)
@@ -83,13 +83,13 @@ ax.plot(x,yPV, '-m', label='Pseudo Voigt')
 ax.plot(x,yV, '-g', label='Voigt')
 ax.legend()
 
-levels = MaxNLocator(nbins=15).tick_values(yo.min(), yo.max())
-cmap = plt.get_cmap('PiYG')
-norm = BoundaryNorm(levels, ncolors=cmap.N, clip=True)
-fig2, ax2 = plt.subplots()
+# levels = MaxNLocator(nbins=15).tick_values(yo.min(), yo.max())
+# cmap = plt.get_cmap('PiYG')
+# norm = BoundaryNorm(levels, ncolors=cmap.N, clip=True)
+# fig2, ax2 = plt.subplots()
 
-cf = ax2.contourf(wL[:-1, :-1] + dL/2., wG[:-1, :-1] + dG/2., yo[:-1, :-1], levels=levels, cmap=cmap)
-fig.colorbar(cf, ax=ax2)
+# cf = ax2.contourf(wL[:-1, :-1] + dL/2., wG[:-1, :-1] + dG/2., yo[:-1, :-1], levels=levels, cmap=cmap)
+# fig.colorbar(cf, ax=ax2)
 
 plt.show()
 

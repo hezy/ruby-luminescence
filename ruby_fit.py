@@ -1,13 +1,12 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon May 13 16:59:05 2019
+"""Created on Mon May 13 16:59:05 2019
 
 @author: Hezy
 """
 
 import glob
-import numpy as np
+
 import matplotlib.pyplot as plt
+import numpy as np
 from pandas import read_csv
 from scipy.optimize import curve_fit
 
@@ -58,7 +57,9 @@ plt.rc("ytick", labelsize=14)
 # read data from csv file
 files = glob.glob("./*.txt")
 for file in sorted(files):
-    data = read_csv(file, skiprows=5, header=None, sep="\t", lineterminator="\n")
+    data = read_csv(
+        file, skiprows=5, header=None, sep="\t", lineterminator="\n"
+    )
     x = data.iloc[:, 0]
     y = data.iloc[:, 1]
 
@@ -72,10 +73,46 @@ for file in sorted(files):
         ruby,
         x,
         y,
-        p0=(wl_guess1, 0.62, 0.5, h_guess1, wl_guess2, 0.696, 0.5, h_guess2, 0, 0, 0),
+        p0=(
+            wl_guess1,
+            0.62,
+            0.5,
+            h_guess1,
+            wl_guess2,
+            0.696,
+            0.5,
+            h_guess2,
+            0,
+            0,
+            0,
+        ),
         bounds=(
-            (650, 0.01, 0.01, 0.01, 650, 0.01, 0.01, 0.01, -np.inf, -np.inf, -np.inf),
-            (720, 30, 1, +np.inf, 720, 30, 1, +np.inf, +np.inf, +np.inf, +np.inf),
+            (
+                650,
+                0.01,
+                0.01,
+                0.01,
+                650,
+                0.01,
+                0.01,
+                0.01,
+                -np.inf,
+                -np.inf,
+                -np.inf,
+            ),
+            (
+                720,
+                30,
+                1,
+                +np.inf,
+                720,
+                30,
+                1,
+                +np.inf,
+                +np.inf,
+                +np.inf,
+                +np.inf,
+            ),
         ),
     )
     perr = np.sqrt(np.diag(pcov))

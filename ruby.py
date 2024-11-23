@@ -29,7 +29,9 @@ def lorentz(x, gamma):
 
 
 def gauss(x, sigma):
-    return (np.exp(-np.square(x) / 2 / np.square(sigma))) / (sigma * np.sqrt(2 * np.pi))
+    return (np.exp(-np.square(x) / 2 / np.square(sigma))) / (
+        sigma * np.sqrt(2 * np.pi)
+    )
 
 
 def voigt(x, sigma, gamma):

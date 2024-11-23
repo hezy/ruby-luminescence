@@ -12,24 +12,45 @@ from scipy.optimize import curve_fit
 import matplotlib.pyplot as plt
 
 # read data from csv file
-data1 = read_csv('20190515-afterN1.csv', skiprows=None, header=None, sep='\t', lineterminator='\n', names=["lambda","intensity"])
-data2 = read_csv('20190515-afterN2.csv', skiprows=None, header=None, sep='\t', lineterminator='\n', names=["lambda","intensity"])
-x1 = data1.iloc[:,0]
-y1 = data1.iloc[:,1]
-x2 = data2.iloc[:,0]
-y2 = data2.iloc[:,1]
+data1 = read_csv(
+    "20190515-afterN1.csv",
+    skiprows=None,
+    header=None,
+    sep="\t",
+    lineterminator="\n",
+    names=["lambda", "intensity"],
+)
+data2 = read_csv(
+    "20190515-afterN2.csv",
+    skiprows=None,
+    header=None,
+    sep="\t",
+    lineterminator="\n",
+    names=["lambda", "intensity"],
+)
+x1 = data1.iloc[:, 0]
+y1 = data1.iloc[:, 1]
+x2 = data2.iloc[:, 0]
+y2 = data2.iloc[:, 1]
+
 
 def lorentz(x, gamma):
-    return gamma / np.pi / (np.square(x) + np.square(gamma)) 
+    return gamma / np.pi / (np.square(x) + np.square(gamma))
+
 
 def gauss(x, sigma):
-    return (np.exp(-np.square(x)/2/np.square(sigma)))/(sigma*np.sqrt(2*np.pi))
+    return (np.exp(-np.square(x) / 2 / np.square(sigma))) / (sigma * np.sqrt(2 * np.pi))
+
 
 def voigt(x, sigma, gamma):
-    return np.real(wofz((x + 1j*gamma)/(sigma * np.sqrt(2)))) / (sigma * np.sqrt(2*np.pi))
+    return np.real(wofz((x + 1j * gamma) / (sigma * np.sqrt(2)))) / (
+        sigma * np.sqrt(2 * np.pi)
+    )
+
 
 def ruby(x, x1, s1, g1, a1, x2, s2, g2, a2, b):
-    return b + a1*voigt((x-x1),s1,g1) + a2*voigt((x-x2),s2,g2)
+    return b + a1 * voigt((x - x1), s1, g1) + a2 * voigt((x - x2), s2, g2)
+
 
 """
 popt, pocv = curve_fit(ruby, x1, y1, p0=(692.2, 0.178, 0.1, 2689.0, 693.7, 0.247, 0.1, 6058.0, 90.4))
@@ -49,19 +70,19 @@ ydif2 = yfit2 - y2
 
 # create figure
 fig, ax = plt.subplots(figsize=(14, 8))
-plt.plot(x1, y1, '.b', label='experiment')
-#plt.plot(x1, yfit1, '-r', label='fit')
-#plt.plot(x1, ydif1, '-g', label='difference')
-plt.plot(x2, y2, '.r', label='experiment')
-#plt.plot(x2, yfit2, '-r', label='fit')
-#plt.plot(x2, ydif2, '-g', label='difference')
+plt.plot(x1, y1, ".b", label="experiment")
+# plt.plot(x1, yfit1, '-r', label='fit')
+# plt.plot(x1, ydif1, '-g', label='difference')
+plt.plot(x2, y2, ".r", label="experiment")
+# plt.plot(x2, yfit2, '-r', label='fit')
+# plt.plot(x2, ydif2, '-g', label='difference')
 
 
 # arange figure
 ax.grid(True)
-ax.legend(loc='best')
-ax.set_title('Ruby')
-ax.set_xlabel('wavelength (nm)')
-ax.set_ylabel('intesity (arb.)')
+ax.legend(loc="best")
+ax.set_title("Ruby")
+ax.set_xlabel("wavelength (nm)")
+ax.set_ylabel("intesity (arb.)")
 
 plt.show()

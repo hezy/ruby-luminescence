@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon May 13 16:59:05 2019
-
-@author: Hezy
-"""
+"""Fitting the ruby luminescence spectrum."""
 
 import glob
 import numpy as np
@@ -15,7 +10,7 @@ from scipy.optimize import curve_fit
 def lorentz(x, wL):
     # Lorentz with max=1 and w=FWHM:
     gamma = wL
-    return 1 / (1 + np.square(x / gamma))
+    return 1 / (1 + np.square(x / gma))
 
 
 def gauss(x, wG):
